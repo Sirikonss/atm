@@ -70,11 +70,28 @@ public class BankAccountService {
         return response.getBody();
     }
 
-    public void editBankAccount(BankAccount bankAccount) {
+//    public void editBankAccount(BankAccount bankAccount) {
+//        String url = "http://localhost:8091/api/bankaccount/" +
+//                bankAccount.getId();
+//        restTemplate.put(url, bankAccount);
+//    }
+
+    public void depositBankAccount(BankAccount bankAccount) {
         String url = "http://localhost:8091/api/bankaccount/" +
                 bankAccount.getId();
-        restTemplate.put(url, bankAccount);
+        BankAccount response = restTemplate.getForObject(url,BankAccount.class);
+        response.deposit(bankAccount.getBalance());
+        restTemplate.put(url,response);
     }
+
+    public void withdrawBankAccount(BankAccount bankAccount) {
+        String url = "http://localhost:8091/api/bankaccount/" +
+                bankAccount.getId();
+        BankAccount response = restTemplate.getForObject(url,BankAccount.class);
+        response.withdraw(bankAccount.getBalance());
+        restTemplate.put(url,response);
+    }
+
 
     public void deleteBankAccount(BankAccount bankAccount) {
         String url = "http://localhost:8091/api/bankaccount/" +
