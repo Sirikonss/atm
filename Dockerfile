@@ -1,4 +1,4 @@
-FROM maven:3.6.1-jdk-8
+FROM maven:3.6.1-jdk-11
 WORKDIR /usr/atm
 COPY pom.xml .
 RUN mvn -B dependency:resolve dependency:resolve-plugins
